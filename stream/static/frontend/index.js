@@ -11,6 +11,7 @@ const sound = document.querySelector('.sound');
 let raiseHand = document.getElementById('raise-hand');
 let muteButton = document.getElementById('mute-unmute');
 let okButton = document.getElementById('ok');
+let endButton = document.getElementById('endbutton');
 
 
 
@@ -30,12 +31,32 @@ const dictate = () => {
 
         if (event.results[0].isFinal) {
 
-            if (speechToText === 'raise hand') {
+            if (speechToText == 'mute') {
+                muteButton.innerHTML = "Unmute";
+            };
+
+            if (speechToText == 'Unmute') {
+                muteButton.innerHTML = "Mute";
+            };
+            if (speechToText == 'raise hand') {
                 raiseHand.innerHTML = "Lower Hand";
             };
 
             if (speechToText === 'lower hand') {
                 raiseHand.innerHTML = "Raise Hand";
+            };
+
+            if (speechToText === 'I agree') {
+                okbutton.innerHTML = "ok";
+            };
+
+            if (speechToText === 'ok') {
+                okbutton.innerHTML = "I agree";
+            };
+
+            if (speechToText === 'leave meeting') {
+
+                setTimeout(() => { alert("Meeting has ended"); }, 2000);
             };
 
             if (speechToText.includes('what is today\'s date')) {

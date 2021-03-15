@@ -135,18 +135,14 @@ class VideoCamera(object):
 
 				
 			elif l==3:
-				if arearatio<27:
-					cv2.putText(frame_flip,'3',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-				
-				else:
-					cv2.putText(frame_flip,'ok',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
+				cv2.putText(frame_flip,'ok',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 				
 			elif l==4:
 				cv2.putText(frame_flip,'4',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 			
 
-			elif l==5:
-				cv2.putText(frame_flip,'5',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
+			#elif l==5:
+			#	cv2.putText(frame_flip,'5',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 			
 
 			else :
