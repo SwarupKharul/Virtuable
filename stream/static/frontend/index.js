@@ -22,10 +22,24 @@ const func = async () => {
             if (data.Face == 'No face found') {
                 muteButton.innerHTML = "Unmute";
             }
-            else if (data.Handraise == 'hand') {
+            else if (data.Handraise == 'Hand raised') {
                 raiseHand.innerHTML = "Lower Hand";
             }
-            else if (data.Handraise == 'no hand') {
+            else if (data.Handraise == 'No hand raised') {
+                raiseHand.innerHTML = "Raise Hand";
+            }
+            else if (data.gesture == 'Unmute') {
+                muteButton.innerHTML = "Mute";
+            }
+            else if (data.gesture == 'Mute') {
+                muteButton.innerHTML = "Unmute";
+            }
+            else if (data.gesture == 'I agree') {
+                okButton.innerHTML = "ok";
+            }
+            else {
+                muteButton.innerHTML = "Unmute";
+                okButton.innerHTML = "I agree";
                 raiseHand.innerHTML = "Raise Hand";
             }
 
@@ -33,7 +47,7 @@ const func = async () => {
     }
 }
 
-func()
+setTimeout(() => { func(); }, 2000);
 
 icon.addEventListener('click', () => {
     sound.play();
@@ -62,16 +76,16 @@ const dictate = () => {
                 raiseHand.innerHTML = "Lower Hand";
             };
 
-            if (speechToText === 'lower hand') {
+            if (speechToText == 'lower hand') {
                 raiseHand.innerHTML = "Raise Hand";
             };
 
-            if (speechToText === 'I agree') {
-                okbutton.innerHTML = "ok";
+            if (speechToText == 'I agree') {
+                okButton.innerHTML = "ok";
             };
 
             if (speechToText === 'ok') {
-                okbutton.innerHTML = "I agree";
+                okButton.innerHTML = "I agree";
             };
 
             if (speechToText === 'leave meeting') {
@@ -95,30 +109,4 @@ const dictate = () => {
 const speak = (action) => {
     utterThis = new SpeechSynthesisUtterance(action());
     synth.speak(utterThis);
-};
-
-const getTime = () => {
-    const time = new Date(Date.now());
-    return `the time is ${time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`
-};
-
-const getDate = () => {
-    const time = new Date(Date.now())
-    return `today is ${time.toLocaleDateString()}`;
-};
-
-const getTheWeather = (speech) => {
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${speech.split(' ')[5]}&appid=58b6f7c78582bffab3936dac99c31b25&units=metric`)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (weather) {
-            if (weather.cod === '404') {
-                utterThis = new SpeechSynthesisUtterance(`I cannot find the weather for ${speech.split(' ')[5]}`);
-                synth.speak(utterThis);
-                return;
-            }
-            utterThis = new SpeechSynthesisUtterance(`the weather condition in ${weather.name} is mostly full of ${weather.weather[0].description} at a temperature of ${weather.main.temp} degrees Celcius`);
-            synth.speak(utterThis);
-        });
 };

@@ -137,8 +137,6 @@ class VideoCamera(object):
 		except:
 			pass
 			
-	
-		
 		ret, jpeg = cv2.imencode('.jpg', frame_flip)
 		return jpeg.tobytes()
 
@@ -176,6 +174,9 @@ class VideoCamera(object):
     #find contours
 		contours,hierarchy= cv2.findContours(mask,cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     
+		gesture='no'
+		hand='no hand'
+
 		try:
     	#find contour of max area(hand)
 			cnt = max(contours, key = lambda x: cv2.contourArea(x))
@@ -233,7 +234,7 @@ class VideoCamera(object):
 				
 			l+=1
 			
-			hand='no hand'
+			
 
 			#print corresponding gestures which are in their ranges
 			font = cv2.FONT_HERSHEY_SIMPLEX
@@ -241,7 +242,7 @@ class VideoCamera(object):
 				if areacnt<2000:
 					cv2.putText(frame_flip,'Put hand in the box',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 				else:
-						gesture='Best of Luck'
+						gesture='I agree'
 			
 			elif not hand_detected==():
 				hand='hand'
@@ -249,18 +250,17 @@ class VideoCamera(object):
 			elif l==2:
 				gesture='Unmute'
 
-				
 			elif l==3:
-					gesture='Mute'
+				gesture='Mute'
 
 			elif l==4:
 				gesture='4'
 
-			
 
 		except:
 			pass
 		
+
 		if faces_detected==():
 			face = 'No face found'
 		else:
