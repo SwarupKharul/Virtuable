@@ -28,7 +28,7 @@ class VideoCamera(object):
 
 		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 		faces_detected = face_detection_videocam.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
-		hand_detected = hand_detection_videocam.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=3,minSize=(10,10))
+		hand_detected = hand_detection_videocam.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3,minSize=(10,10))
 		for (x, y, w, h) in faces_detected:
 			cv2.rectangle(image, pt1=(x, y), pt2=(x + w, y + h), color=(255, 0, 0), thickness=2)
 		for (x, y, w, h) in hand_detected:
@@ -146,7 +146,7 @@ class VideoCamera(object):
 
 		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 		faces_detected = face_detection_videocam.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
-		hand_detected = hand_detection_videocam.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=3,minSize=(10,10))
+		hand_detected = hand_detection_videocam.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=3,minSize=(10,10))
 		for (x, y, w, h) in faces_detected:
 			cv2.rectangle(image, pt1=(x, y), pt2=(x + w, y + h), color=(255, 0, 0), thickness=2)
 		for (x, y, w, h) in hand_detected:

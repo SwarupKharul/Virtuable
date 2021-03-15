@@ -13,10 +13,13 @@ let muteButton = document.getElementById('mute-unmute');
 let okButton = document.getElementById('ok');
 let endButton = document.getElementById('endbutton');
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const func = async () => {
     while (true) {
-        console.log("hello")
+        await sleep(1000);
         await fetch("/feature_feed").then(resp => resp.json()).then(data => {
             console.log(data)
             if (data.Face == 'No face found') {

@@ -25,7 +25,6 @@ def video_feed(request):
 def features():
 	global camera
 	feature = camera.render_features()
-	print(feature)
 	return feature
 
 def feature_feed(request):
