@@ -116,37 +116,24 @@ class VideoCamera(object):
 			#print corresponding gestures which are in their ranges
 			font = cv2.FONT_HERSHEY_SIMPLEX
 			if l==1:
-				if areacnt<2000:
-					cv2.putText(frame_flip,'Put hand in the box',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-				else:
-					if arearatio<12:
-						cv2.putText(frame_flip,'0',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-						
-					elif arearatio<17.5:
-						cv2.putText(frame_flip,'Best of luck',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-						
-					else:
-						cv2.putText(frame_flip,'1',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-					
+					cv2.putText(frame_flip,'Ok',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 						
 			elif l==2:
-				cv2.putText(frame_flip,'2',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-	
+				cv2.putText(frame_flip,'Unmute',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 
 				
 			elif l==3:
-				cv2.putText(frame_flip,'ok',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
+				cv2.putText(frame_flip,'Mute',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 				
 			elif l==4:
 				cv2.putText(frame_flip,'4',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 			
+			elif not hand_detected==():
+				cv2.putText(frame_flip,'Hand raised',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 
-			#elif l==5:
-			#	cv2.putText(frame_flip,'5',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-			
+			elif not faces_detected==():
+				cv2.putText(frame_flip,'Face found',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 
-			else :
-				cv2.putText(frame_flip,'reposition',(10,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 		except:
 			pass
 			
@@ -156,7 +143,7 @@ class VideoCamera(object):
 		return jpeg.tobytes()
 
 	def render_features(self):
-		features = ['Face','Hand raise','gesture']
+
 		success, image = self.video.read()
 
 		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -246,56 +233,47 @@ class VideoCamera(object):
 				
 			l+=1
 			
+			hand='no hand'
+
 			#print corresponding gestures which are in their ranges
 			font = cv2.FONT_HERSHEY_SIMPLEX
 			if l==1:
 				if areacnt<2000:
 					cv2.putText(frame_flip,'Put hand in the box',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 				else:
-					if arearatio<12:
-						cv2.putText(frame_flip,'0',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-						features[2]='0'
-					elif arearatio<17.5:
-						cv2.putText(frame_flip,'Best of luck',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-						features[2]='Best of Luck'
-					
-					else:
-						cv2.putText(frame_flip,'1',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-						features[2]='1'
+						gesture='Best of Luck'
+			
+			elif not hand_detected==():
+				hand='hand'
 						
 			elif l==2:
-				cv2.putText(frame_flip,'2',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-				features[2]='2'
+				gesture='Unmute'
 
 				
 			elif l==3:
-				if arearatio<27:
-					cv2.putText(frame_flip,'3',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-					features[2]='3'
-				else:
-					cv2.putText(frame_flip,'ok',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-					features[2]='ok'
+					gesture='Mute'
 
 			elif l==4:
-				cv2.putText(frame_flip,'4',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-				features[2]='4'
+				gesture='4'
 
-			elif l==5:
-				cv2.putText(frame_flip,'5',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-				features[2]='5'
+			
 
-			else :
-				cv2.putText(frame_flip,'reposition',(10,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 		except:
 			pass
-			
+		
 		if faces_detected==():
-			features[0] = 'No face found'
+			face = 'No face found'
 		else:
-			features[0]	= 'Face found'
+			face	= 'Face found'
 		if hand_detected==():
-			features[1] = 'No hand raised'
+			hand = 'No hand raised'
 		else:
-			features[1] = 'Hand raised'
+			hand = 'Hand raised'
+
+		features = {
+			'Face':face,
+			'Handraise':hand,
+			'gesture': gesture
+			}
 		
 		return features

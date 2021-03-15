@@ -14,6 +14,26 @@ let okButton = document.getElementById('ok');
 let endButton = document.getElementById('endbutton');
 
 
+const func = async () => {
+    while (true) {
+        console.log("hello")
+        await fetch("/feature_feed").then(resp => resp.json()).then(data => {
+            console.log(data)
+            if (data.Face == 'No face found') {
+                muteButton.innerHTML = "Unmute";
+            }
+            else if (data.Handraise == 'hand') {
+                raiseHand.innerHTML = "Lower Hand";
+            }
+            else if (data.Handraise == 'no hand') {
+                raiseHand.innerHTML = "Raise Hand";
+            }
+
+        })
+    }
+}
+
+func()
 
 icon.addEventListener('click', () => {
     sound.play();
@@ -70,6 +90,7 @@ const dictate = () => {
         }
     }
 }
+
 
 const speak = (action) => {
     utterThis = new SpeechSynthesisUtterance(action());

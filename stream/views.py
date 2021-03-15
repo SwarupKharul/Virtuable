@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http.response import StreamingHttpResponse
+from django.http import JsonResponse
 from stream.camera import VideoCamera
 from django.http import HttpResponse
 from django.template import loader, Context
@@ -23,10 +24,10 @@ def video_feed(request):
 
 def features():
 	global camera
-	while True:
-		feature = camera.render_features()
-		yield (feature)
+	feature = camera.render_features()
+	print(feature)
+	return feature
 
 def feature_feed(request):
-	return StreamingHttpResponse(features(),content_type='text/plain')
+	return	JsonResponse(features())
 
