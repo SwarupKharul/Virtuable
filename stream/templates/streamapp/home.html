@@ -12,21 +12,35 @@
   <link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
 </head>
 
-<div class="container">
-  <div class="row">
-    <div class="video col-sm">
-      <h1>Video Live Stream</h1>
-      <img src="{% url 'video_feed' %}">
-    </div>
+<body onkeypress="sound.play();
+dictate();">
+  <div class="container">
+    <div class="row">
+      <div class="video col-sm">
+        <h1>Video Live Stream</h1>
+        <img src="{% url 'video_feed' %}">
+      </div>
+      <div class="chat col-sm">
+        <!--page container -->
+        <div class="text-box" contenteditable="true">Text Box</div>
+        <!--text box which will contain spoken text -->
+        <i class="fa fa-microphone">Unmute</i> <!-- microphone icon to be clicked before speaking -->
 
+        <div id="raise-hand">Hand Raise</div>
+
+        <div>Thumbs Up</div>
+
+        <div>End</div>
+
+        <div src="{% url 'feature_feed' %}">{{ feature }}</div>
+      </div>
+
+    </div>
   </div>
 
-
-</div>
-
-<audio class="sound" src="{% static 'frontend/chime.mp3' %}"></audio>
-<!-- sound to be played when we click icon => http://soundbible.com/1598-Electronic-Chime.html -->
-<script src="{% static 'frontend/index.js' %}"></script> <!-- link to index.js script -->
+  <audio class=" sound" src="{% static 'frontend/chime.mp3' %}"></audio>
+  <!-- sound to be played when we click icon => http://soundbible.com/1598-Electronic-Chime.html -->
+  <script src="{% static 'frontend/index.js' %}"></script> <!-- link to index.js script -->
 </body>
 
 
