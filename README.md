@@ -1,28 +1,31 @@
 # Virtuable
-**Objective**: We aim to assist visually impaired people to efficiently
+**Objective**: 
+We aim to assist visually impaired people to efficiently
 interact and attend virtual meetings.
 
-**The problem we are aiming to solve**: solves problems related to
-accessibility and involvement of the visually impaired in online
+**The problem we are aiming to solve**: 
+Problems related to accessibility and involvement of the visually impaired in online
 meetings, such as inability in visually locating and pressing the
 specific keys to access the desired features like mic button, etc. Our
 project will enable them to quickly access all the desired features on an
 online platform using hand gestures as a tool.
 
-**Novelty of our project**: We have implemented new visual and audio
-features for enhancing accessibility on online platforms which previously
+**Novelty of our project**: 
+We have implemented new visual and audio features for enhancing accessibility on online platforms which previously
 didn’t exist. Our features can drastically enhance the interaction of
 visually impaired people in online meetings and allow effective
 communication and interaction required for socializing and learning on an
 online platform.
 
 
-**Tech Stack**: Python – OpenCV, Django,
+**Tech Stack**: 
+Python – OpenCV, Django,
 JavaScript - Speech Recognition,
  HTML, CSS, Bootstrap
  
  
-**Implementation**: We will use our website to implement our novel
+**Implementation**: 
+We will use our website to implement our novel
 features. We will use OpenCV for image processing and will use Django as
 the backend. We will use specific hand gestures and map them with buttons
 like Mute/Unmute, Hand raise, etc recognised by a distinct sound cue. We
