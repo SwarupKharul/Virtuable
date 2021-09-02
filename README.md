@@ -43,10 +43,12 @@ which be sent in the chats or can be used as commands.
 We plan to develop and provide our services through a web browser extension in collaboration with any leading video conferencing platform.
 
 ## How to run this
+```
 git clone https://github.com/SwarupKharul/Virtuable.git
 cd Virtuable
 pip install -r requirements.txt
 python manage.py runserver
+```
 
 ## Developed by:office_worker::
 - [Swarup Kharul](https://github.com/SwarupKharul)
