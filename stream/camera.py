@@ -5,7 +5,7 @@ import numpy as np
 import math
 from django.conf import settings
 face_detection_videocam = cv2.CascadeClassifier(os.path.join(
-			settings.BASE_DIR,'opencv_haarcascade_data/haarcascade_frontalface_default.xml'))
+			settings.BASE_DIR, 'opencv_haarcascade_data/haarcascade_frontalface_default.xml'))
 hand_detection_videocam = cv2.CascadeClassifier(os.path.join(
 			settings.BASE_DIR,'opencv_haarcascade_data/haarcascade_hand_detection.xml'))
 
@@ -15,7 +15,7 @@ upper_skin = np.array([20,255,255], dtype=np.uint8)
 	
 class VideoCamera(object):
 	def __init__(self):
-		self.video = cv2.VideoCapture(0)
+		self.video = cv2.VideoCapture(1)
 
 	def __del__(self):
 		self.video.release()
@@ -120,8 +120,7 @@ class VideoCamera(object):
 						
 			elif l==2:
 				cv2.putText(frame_flip,'Unmute',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
-
-				
+	
 			elif l==3:
 				cv2.putText(frame_flip,'Mute',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 				
@@ -143,6 +142,7 @@ class VideoCamera(object):
 	def render_features(self):
 
 		success, image = self.video.read()
+		print(image)
 
 		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 		faces_detected = face_detection_videocam.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
@@ -242,7 +242,7 @@ class VideoCamera(object):
 				if areacnt<2000:
 					cv2.putText(frame_flip,'Put hand in the box',(0,50), font, 2, (0,0,255), 3, cv2.LINE_AA)
 				else:
-						gesture='I agree'
+					gesture='I agree'
 			
 			elif not hand_detected==():
 				hand='hand'
@@ -255,7 +255,6 @@ class VideoCamera(object):
 
 			elif l==4:
 				gesture='4'
-
 
 		except:
 			pass
